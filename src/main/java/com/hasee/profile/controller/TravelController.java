@@ -27,7 +27,11 @@ public class TravelController {
 
     @GetMapping("travel/nickname/{nickname}")
     public Travel getTravelByNickname(@PathVariable(name = "nickname") String nickname) throws Exception {
-        return travelRepository.findByNickname(nickname);
+        if(!nickname.equalsIgnoreCase("")){
+            return travelRepository.findByNickname(nickname);
+        } else {
+            return null;
+        }
     }
 
     @PostMapping("travel")
@@ -48,6 +52,7 @@ public class TravelController {
         travel1.setFirearms(travel.getFirearms());
         travel1.setNickname(travel.getNickname());
         travel1.setLiveAnimalOrPlant(travel.getLiveAnimalOrPlant());
+        travel1.setTimeUnit(travel.getTimeUnit());
         return travelRepository.save(travel1);
     }
 
